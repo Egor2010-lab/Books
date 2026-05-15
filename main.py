@@ -16,6 +16,12 @@ def add_book():
     books = load_books()
     title = input("Название книги: ")
     author = input("Автор: ")
+
+    # Проверка на дубликат: ищем книгу с таким же автором и названием
+    if any(book['title'] == title and book['author'] == author for book in books):
+        print("Эта книга уже есть в списке!")
+        return  # прерываем выполнение функции
+
     rating = int(input("Оценка (1–5): "))
     date = datetime.now().strftime("%Y-%m-%d")
 
