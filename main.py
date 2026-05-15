@@ -74,6 +74,20 @@ def show_author_stats():
     else:
         print("Нет данных об авторах.")
 
+def delete_book():
+    books = load_books()
+    show_all_books()
+    try:
+        num = int(input("Введите номер книги для удаления: ")) - 1
+        if 0 <= num < len(books):
+            removed = books.pop(num)
+            save_books(books)
+            print(f"Книга '{removed['title']}' удалена.")
+        else:
+            print("Неверный номер.")
+    except ValueError:
+        print("Введите число.")
+
 def main():
     while True:
         print("\nМеню:")
@@ -81,7 +95,8 @@ def main():
         print("2. Показать все книги")
         print("3. Средняя оценка")
         print("4. Статистика по авторам")
-        print("5. Выйти")
+        print("5. Удалить книгу")
+        print("6. Выйти")
         
         choice = input("Выберите пункт меню: ").strip()
         
@@ -94,6 +109,8 @@ def main():
         elif choice == '4':
             show_author_stats()
         elif choice == '5':
+            delete_book()
+        elif choice == '6':
             print("До свидания!")
             break
         else:
